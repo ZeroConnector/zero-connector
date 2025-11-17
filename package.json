@@ -1,0 +1,60 @@
+{
+  "name": "zero-connector",
+  "version": "1.0.1",
+  "description": "Solana wallet authentication system with password-based security and adapter-based storage",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./client": "./src/client/utils.js",
+    "./storage": "./src/storage/index.js",
+    "./core/crypto": "./src/core/crypto.js",
+    "./core/session": "./src/core/session.js",
+    "./core/solana": "./src/core/solana.js"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepublishOnly": "echo 'Ready to publish Zero Connector'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "solana",
+    "wallet",
+    "authentication",
+    "web3",
+    "crypto",
+    "password",
+    "blockchain",
+    "sol",
+    "solana-wallet",
+    "wallet-auth",
+    "password-wallet",
+    "solana-auth"
+  ],
+  "author": "Zero Connector Team",
+  "license": "MIT",
+  "homepage": "https://zeroconnector.fun",
+  "dependencies": {
+    "@solana/web3.js": "^1.87.0",
+    "bs58": "^5.0.0"
+  },
+  "peerDependencies": {
+    "pg": "^8.0.0",
+    "mongodb": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "pg": {
+      "optional": true
+    },
+    "mongodb": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
