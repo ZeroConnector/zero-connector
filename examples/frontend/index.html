@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero Connector Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Zero Connector Test</h1>
+      <p>Solana Wallet Authentication System</p>
+    </header>
+
+    <!-- Authentication Status -->
+    <div id="auth-status" class="card hidden">
+      <div class="status-header">
+        <span class="status-badge">Authenticated</span>
+        <button id="logout-btn" class="btn-secondary">Logout</button>
+      </div>
+      <div class="wallet-info">
+        <label>Public Key:</label>
+        <div class="public-key-display">
+          <code id="current-publickey"></code>
+          <button id="copy-btn" class="btn-icon" title="Copy">📋</button>
+        </div>
+      </div>
+      <div class="balance-info">
+        <label>Balance:</label>
+        <div class="balance-display">
+          <span id="balance-amount">0.0000</span> SOL
+          <button id="refresh-balance-btn" class="btn-icon" title="Refresh">🔄</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Wallet Section -->
+    <div id="create-section" class="card">
+      <h2>Create New Wallet</h2>
+      <form id="create-form">
+        <div class="form-group">
+          <label for="create-password">Password:</label>
+          <input 
+            type="password" 
+            id="create-password" 
+            placeholder="Enter secure password" 
+            required 
+            minlength="8"
+          >
+        </div>
+        <div class="form-group">
+          <label for="create-password-confirm">Confirm Password:</label>
+          <input 
+            type="password" 
+            id="create-password-confirm" 
+            placeholder="Confirm password" 
+            required 
+            minlength="8"
+          >
+        </div>
+        <button type="submit" class="btn-primary">Create Wallet</button>
+      </form>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login-section" class="card">
+      <h2>Login to Existing Wallet</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-publickey">Public Key:</label>
+          <input 
+            type="text" 
+            id="login-publickey" 
+            placeholder="Enter your public key" 
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password:</label>
+          <input 
+            type="password" 
+            id="login-password" 
+            placeholder="Enter password" 
+            required
+          >
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+    </div>
+
+    <!-- Result Display -->
+    <div id="result-section" class="card hidden">
+      <h3 id="result-title">Result</h3>
+      <pre id="result-content"></pre>
+    </div>
+
+    <!-- API Log -->
+    <div class="card">
+      <h3>API Log</h3>
+      <div id="api-log" class="log-container"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
