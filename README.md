@@ -1,3 +1,6 @@
+<img width="500" height="468" alt="image" src="https://github.com/user-attachments/assets/8cb703c1-a5fb-4cf9-bd08-3c6c268c9b26" />
+
+
 # Zero Connector
 
 **Solana wallet authentication system with password-based security**
