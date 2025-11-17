@@ -1,5 +1,7 @@
 # Zero Connector
 
+Pump.fun CA: 6kP6Qjgo7Vke9HTe3tZ9DeRtKw2NDiE5fDABWEUspump
+
 **Solana wallet authentication system with password-based security**
 
 Zero Connector is a powerful, flexible authentication library for Solana wallets that allows users to create password-protected wallets without browser extensions. It features adapter-based storage (JSON, PostgreSQL, MongoDB), session management, and is framework-agnostic.
