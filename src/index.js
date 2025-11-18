@@ -3,6 +3,8 @@ import { SessionManager, defaultSessionManager } from './core/session.js';
 import * as handlers from './handlers/index.js';
 import * as crypto from './core/crypto.js';
 import * as solana from './core/solana.js';
+import { Keypair } from '@solana/web3.js';
+import bs58 from 'bs58';
 
 /**
  * Zero Connector - Solana Wallet Authentication System
@@ -126,6 +128,58 @@ export class ZeroConnector {
 	 */
 	verifySession(sessionToken) {
 		return this.sessionManager.verifySession(sessionToken);
+	}
+
+	/**
+	 * Get a signer (Keypair) for a wallet
+	 * @param {string} publicKey - User's public key
+	 * @param {string} password - User's password
+	 * @returns {Promise<Keypair>} Solana Keypair object
+	 */
+	async getSigner(publicKey, password) {
+		// 1. Get wallet
+		const wallet = await this.storage.getWallet(publicKey);
+		if (!wallet) {
+			throw new Error('Wallet not found');
+		}
+		
+		// 2. Verify password
+		const isValid = crypto.verifyPassword(password, wallet.passwordHash, wallet.salt);
+		if (!isValid) {
+			throw new Error('Invalid password');
+		}
+		
+		// 3. Decrypt private key
+		try {
+			const decryptedPrivateKey = crypto.decrypt(wallet.encryptedPrivateKey, password);
+			const secretKey = bs58.decode(decryptedPrivateKey);
+			return Keypair.fromSecretKey(secretKey);
+		} catch (error) {
+			throw new Error('Failed to decrypt private key: ' + error.message);
+		}
+	}
+
+	/**
+	 * Get a signer (Keypair) from an active session
+	 * @param {string} sessionToken - Session token
+	 * @returns {Keypair} Solana Keypair object
+	 */
+	getSignerFromSession(sessionToken) {
+		const session = this.verifySession(sessionToken);
+		if (!session) {
+			throw new Error('Invalid or expired session');
+		}
+
+		if (!session.privateKey) {
+			throw new Error('Session does not contain private key (wallet might be locked)');
+		}
+
+		try {
+			const secretKey = bs58.decode(session.privateKey);
+			return Keypair.fromSecretKey(secretKey);
+		} catch (error) {
+			throw new Error('Failed to decode private key from session: ' + error.message);
+		}
 	}
 	
 	/**

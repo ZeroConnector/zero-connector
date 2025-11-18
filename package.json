@@ -7,6 +7,7 @@
   "exports": {
     ".": "./src/index.js",
     "./client": "./src/client/utils.js",
+    "./client/x402": "./src/client/x402.js",
     "./storage": "./src/storage/index.js",
     "./core/crypto": "./src/core/crypto.js",
     "./core/session": "./src/core/session.js",
@@ -39,12 +40,14 @@
   "license": "MIT",
   "homepage": "https://zeroconnector.fun",
   "dependencies": {
+    "@solana/spl-token": "^0.4.14",
     "@solana/web3.js": "^1.87.0",
-    "bs58": "^5.0.0"
+    "bs58": "^5.0.0",
+    "x402-solana": "^0.1.4"
   },
   "peerDependencies": {
-    "pg": "^8.0.0",
-    "mongodb": "^6.0.0"
+    "mongodb": "^6.0.0",
+    "pg": "^8.0.0"
   },
   "peerDependenciesMeta": {
     "pg": {

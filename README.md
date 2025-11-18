@@ -1,7 +1,5 @@
 # Zero Connector
 
-Pump.fun CA: 6kP6Qjgo7Vke9HTe3tZ9DeRtKw2NDiE5fDABWEUspump
-
 **Solana wallet authentication system with password-based security**
 
 Zero Connector is a powerful, flexible authentication library for Solana wallets that allows users to create password-protected wallets without browser extensions. It features adapter-based storage (JSON, PostgreSQL, MongoDB), session management, and is framework-agnostic.
@@ -16,6 +14,7 @@ Zero Connector is a powerful, flexible authentication library for Solana wallets
 - **TypeScript Support**: Full type definitions included
 - **Security First**: AES-256-GCM encryption, scrypt password hashing
 - **Blockchain Integration**: Automatic balance fetching from Solana mainnet/devnet
+- **x402 Payment Support**: Seamlessly handle paid requests (e.g., AI agents) with built-in wallet integration
 
 ## Installation
 
@@ -64,6 +63,27 @@ console.log(authResult.sessionToken); // Session token for future requests
 // Get balance
 const balance = await connector.getBalance(result.publicKey);
 console.log(`Balance: ${balance.balance.solBalance} SOL`);
+
+// Make Paid Requests (x402)
+// 1. Get Signer from session or login
+const signer = await connector.getSigner(result.publicKey, 'secure-password-123');
+
+// 2. Create Payment Client
+import { createZeroX402Client } from 'zero-connector/client/x402';
+import { Connection } from '@solana/web3.js';
+
+const client = createZeroX402Client({
+  connection: new Connection('https://api.mainnet-beta.solana.com'),
+  signer,
+  network: 'solana' // or 'devnet'
+});
+
+// 3. Send Request (Handles 402 Payment Automatically)
+const response = await client.fetch('https://api.example.com/paid-service', {
+  method: 'POST',
+  body: JSON.stringify({ prompt: 'Hello AI' })
+});
+console.log(await response.json());
 ```
 
 ## Storage Adapters
@@ -180,6 +200,18 @@ await connector.addTransaction(publicKey, { type: 'payment', amount: 0.1 });
 ```javascript
 await connector.getTransactions(publicKey, 100, 0);
 // Returns: array of transactions
+```
+
+**getSigner(publicKey, password)**
+```javascript
+const signer = await connector.getSigner(publicKey, password);
+// Returns: Keypair (Signer) object for signing transactions
+```
+
+**getSignerFromSession(sessionToken)**
+```javascript
+const signer = connector.getSignerFromSession(sessionToken);
+// Returns: Keypair (Signer) object from active session
 ```
 
 ## Frontend Integration
