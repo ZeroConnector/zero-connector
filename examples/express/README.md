@@ -99,6 +99,26 @@ Logout and clear session
 ### GET /api/wallet/verify
 Verify if user is authenticated
 
+### POST /api/ai/request
+Proxy for x402 paid AI requests. Uses the authenticated user's wallet to pay for requests automatically.
+
+**Request:**
+```json
+{
+  "targetUrl": "https://api.zeroconnector.fun/api/zeroc-x402-demo", // Optional, defaults to demo
+  "payloadKey": "prompt", // Optional, defaults to 'prompt' (use 'message' for some APIs)
+  "prompt": "Hello AI"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": "AI Response..."
+}
+```
+
 ## Testing with cURL
 
 Create wallet:

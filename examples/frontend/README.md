@@ -26,11 +26,12 @@ Frontend runs on `http://localhost:5173`
 
 - Create wallets with password protection
 - Login with existing wallets
-- Balance display (SOL)
+- Balance display (SOL + USDC)
 - Refresh balance from blockchain
 - Session management with cookies
 - Live API log for all requests
 - Copy public key to clipboard
+- **x402 AI Request Integration**: Pay for AI services directly from your wallet
 - Responsive design
 
 ## Usage
@@ -48,8 +49,16 @@ Frontend runs on `http://localhost:5173`
 
 ### 3. Check Balance
 - Balance loads automatically on login
+- Displays both **SOL** and **USDC** balance
 - Click 🔄 to refresh balance from blockchain
 - Network can be configured in Express server (mainnet-beta/devnet)
+
+### 4. x402 AI Requests
+- Select an AI Agent from the dropdown (or use custom URL)
+- Enter a prompt (or use a template)
+- Click "Send Request"
+- The backend automatically handles the 402 Payment Challenge using your wallet
+- Cost: ~0.01 USDC per request
 
 ## API Endpoints (tested)
 

@@ -30,6 +30,9 @@
         <label>Balance:</label>
         <div class="balance-display">
           <span id="balance-amount">0.0000</span> SOL
+        </div>
+        <div class="balance-display">
+          <span id="usdc-balance-amount">0.00</span> USDC
           <button id="refresh-balance-btn" class="btn-icon" title="Refresh">🔄</button>
         </div>
       </div>
@@ -93,6 +96,42 @@
     <div id="result-section" class="card hidden">
       <h3 id="result-title">Result</h3>
       <pre id="result-content"></pre>
+    </div>
+
+    <!-- x402 Request Section -->
+    <div id="x402-section" class="card hidden">
+      <h2>x402 AI Request</h2>
+      <p>Make a paid request to an AI Agent (0.01 USDC)</p>
+      
+      <div class="form-group">
+        <label for="api-selector">Select Agent:</label>
+        <select id="api-selector">
+          <option value="https://api.zeroconnector.fun/api/zeroc-x402-demo">Zero Connector Demo</option>
+          <option value="https://agents.memeputer.com/x402/solana/finnputer">Finnputer</option>
+          <option value="https://agents.memeputer.com/x402/solana/memeputer">Memeputer</option>
+          <option value="custom">Custom URL</option>
+        </select>
+      </div>
+
+      <div id="custom-url-group" class="form-group hidden">
+        <label for="custom-url">Custom API URL:</label>
+        <input type="text" id="custom-url" placeholder="https://...">
+      </div>
+
+      <div class="form-group">
+        <label for="ai-prompt">Prompt:</label>
+        <div class="input-group">
+             <input 
+              type="text" 
+              id="ai-prompt" 
+              placeholder="Enter your prompt..." 
+              required
+            >
+            <button id="template-btn" class="btn-secondary" style="width: auto;">Use Template</button>
+        </div>
+      </div>
+
+      <button id="send-x402-btn" class="btn-primary">Send Request (0.01 USDC)</button>
     </div>
 
     <!-- API Log -->
